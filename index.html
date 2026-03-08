@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>MindAR Two Image Targets</title>
+
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.4/dist/mindar-image-aframe.prod.js"></script>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+}
+</style>
+</head>
+
+<body>
+
+<a-scene
+mindar-image="imageTargetSrc: new.mind;"
+vr-mode-ui="false"
+device-orientation-permission-ui="false">
+
+<a-assets>
+<a-asset-item id="model1" src="model.glb"></a-asset-item>
+</a-assets>
+
+<a-camera position="0 0 0" look-controls="false"></a-camera>
+
+<a-entity mindar-image-target="targetIndex:0">
+<a-entity
+gltf-model="#model1"
+position="0 0 0"
+rotation="90 0 0"
+scale="0.15 0.15 0.15">
+</a-entity>
+</a-entity>
+
+</a-scene>
+
+</body>
+</html>
