@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>MindAR Two Image Targets</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MindAR GLB Viewer</title>
 
-<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.4/dist/mindar-image-aframe.prod.js"></script>
+  <!-- A-Frame MUST load before MindAR -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.4/dist/mindar-image-aframe.prod.js"></script>
 
-<style>
-body{
-margin:0;
-overflow:hidden;
-}
-</style>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { overflow: hidden; width: 100vw; height: 100vh; }
+  </style>
 </head>
-
 <body>
 
-<a-scene
-mindar-image="imageTargetSrc: new.mind;"
-vr-mode-ui="false"
-device-orientation-permission-ui="false">
+  <a-scene
+    mindar-image="imageTargetSrc: ./new.mind; autoStart: true; uiLoading: yes; uiError: yes; uiScanning: yes;"
+    color-space="sRGB"
+    renderer="colorManagement: true; physicallyCorrectLights: true"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
 
-<a-assets>
-<a-asset-item id="model1" src="model.glb"></a-asset-item>
-</a-assets>
+    <a-assets timeout="10000">
+      <!-- Preload the GLB model -->
+      <a-asset-item id="model1" src="./model.glb"></a-asset-item>
+    </a-assets>
 
-<a-camera position="0 0 0" look-controls="false"></a-camera>
+    <!-- Camera -->
+    <a-camera position="0 0 0" look-controls="false"></a-camera>
 
-<a-entity mindar-image-target="targetIndex:0">
-<a-entity
-gltf-model="#model1"
-position="0 0 0"
-rotation="90 0 0"
-scale="0.15 0.15 0.15">
-</a-entity>
-</a-entity>
+    <!-- Image Target 0 -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-entity
+        gltf-model="#model1"
+        position="0 0 0"
+        rotation="-90 0 0"
+        scale="0.1 0.1 0.1"
+        animation-mixer>
+      </a-entity>
+    </a-entity>
 
-</a-scene>
+  </a-scene>
 
 </body>
 </html>
